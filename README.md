@@ -1,10 +1,10 @@
-# Microservicio de Productos - FullStack3
+# Microservicio de Usuarios - FullStack3
 
 ## Descripción
-Este proyecto corresponde a un microservicio desarrollado con **Spring Boot** para la gestión de productos.  
-Permite realizar operaciones CRUD sobre la entidad `PRODUCTO`.
+Este proyecto corresponde a un microservicio desarrollado con **Spring Boot** para la gestión de usuarios.  
+Permite realizar operaciones CRUD sobre la entidad `Usuario` y además incorpora un endpoint de login para validar credenciales.
 
-Este microservicio forma parte de una arquitectura basada en microservicios, donde el módulo de productos funciona de manera independiente y se conecta a una base de datos **Oracle**.
+Este microservicio forma parte de una arquitectura basada en microservicios, donde el módulo de usuarios funciona de manera independiente y se conecta a una base de datos **Oracle**.
 
 ---
 
@@ -23,11 +23,12 @@ Este microservicio forma parte de una arquitectura basada en microservicios, don
 
 El microservicio permite:
 
-- Listar todos los productos
-- Buscar un producto por su ID
-- Crear un nuevo producto
-- Actualizar un producto existente
-- Eliminar un producto
+- Listar todos los usuarios
+- Buscar un usuario por su ID
+- Crear un nuevo usuario
+- Actualizar un usuario existente
+- Eliminar un usuario
+- Validar login mediante correo y contraseña
 
 ---
 
@@ -45,75 +46,55 @@ El proyecto está organizado en capas:
 
 ## Entidad principal
 
-### Producto
-La entidad `Producto` contiene los siguientes campos:
+### Usuario
+La entidad `Usuario` contiene los siguientes campos:
 
 - `id`
 - `nombre`
-- `descripcion`
-- `precio`
-- `stock`
+- `apaterno`
+- `amaterno`
+- `correo`
+- `password`
+- `rol`
 
 Además, cuenta con validaciones como:
 
 - campos obligatorios
+- validación de correo
 - longitud mínima y máxima
-- precio mayor a 0
-- stock no negativo
+- restricción de rol
 
 ---
 
 ## Endpoints disponibles
 
-### 1. Listar productos
-**GET** `/api/productos`
+### 1. Listar usuarios
+**GET** `/api/usuarios`
 
-Obtiene la lista de todos los productos registrados.
-
----
-
-### 2. Buscar producto por ID
-**GET** `/api/productos/{id}`
-
-Obtiene un producto específico según su identificador.
+Obtiene la lista de todos los usuarios registrados.
 
 ---
 
-### 3. Crear producto
-**POST** `/api/producto`
+### 2. Buscar usuario por ID
+**GET** `/api/usuarios/{id}`
 
-Crea un nuevo producto en la base de datos.
+Obtiene un usuario específico según su identificador.
+
+---
+
+### 3. Crear usuario
+**POST** `/api/usuarios`
+
+Crea un nuevo usuario en la base de datos.
 
 #### Ejemplo de body:
 ```json
 {
-  "nombre": "Mouse Gamer",
-  "descripcion": "Mouse RGB 7200 DPI",
-  "precio": 19990,
-  "stock": 10
+  "nombre": "Pedro",
+  "apaterno": "Soto",
+  "amaterno": "Ramirez",
+  "correo": "psoto@tienda.cl",
+  "password": "1234",
+  "rol": "CLIENTE"
 }
 
----
-
-### 4. Actualizar producto
-**PUT** `/api/productos/{id}`
-
-Actualiza la información de un producto existente
-
-#### Ejemplo de body:
-```json
-{
-  "nombre": "Mouse Gamer",
-  "descripcion": "Mouse RGB 7200 DPI",
-  "precio": 19990,
-  "stock": 15
-}
-
----
-
-### 5. Eliminar producto
-**DELETE** `/api/productos/{id}`
-
-Elimina un producto de la base de datos
-
----
