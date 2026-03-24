@@ -93,6 +93,8 @@ Crea un nuevo producto en la base de datos.
   "stock": 10
 }
 
+---
+
 ### 4. Actualizar producto
 **PUT** `/api/productos/{id}`
 
@@ -107,7 +109,11 @@ Actualiza la información de un producto existente
   "stock": 15
 }
 
+---
+
 ### 5. Eliminar producto
 **DELETE** `/api/productos/{id}`
 
 Elimina un producto de la base de datos
+
+---
